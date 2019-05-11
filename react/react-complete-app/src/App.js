@@ -10,7 +10,7 @@ class App extends Component {
   // components, we will use hooks.
   //
   // In case state changes, it will force the component
-  // to be re-rendered.
+  // to be re-rendered. The same should be said from "props".
   state = {
     persons: [
       { name: "Max", age: 28 },
@@ -19,6 +19,13 @@ class App extends Component {
     ]
   };
 
+  switchNameHandler = event => {
+    // console.log("Switch was clicked!");
+    // DO NOT DO THIS: this.state.persons[0].name = "Maximillian";
+    let newState = JSON.parse(JSON.stringify(this.state));
+    newState.persons[0].name = "Maximilian";
+    this.setState(newState);
+  };
   render() {
     // Remember always to wrap the JSX of a component
     // inside one root HTML enlement that englobes
@@ -40,7 +47,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">Hi! I'm a React app.</p>
-        <button>Switch Name</button>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
