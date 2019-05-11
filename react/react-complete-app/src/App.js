@@ -4,6 +4,21 @@ import "./App.css";
 import Person from "./Person";
 
 class App extends Component {
+  // Only available on components created as
+  // an extension from Components (that is, only
+  // with stated-defined components). For function-defined
+  // components, we will use hooks.
+  //
+  // In case state changes, it will force the component
+  // to be re-rendered.
+  state = {
+    persons: [
+      { name: "Max", age: 28 },
+      { name: "Manu", age: 29 },
+      { name: "Stephanie", age: 26 }
+    ]
+  };
+
   render() {
     // Remember always to wrap the JSX of a component
     // inside one root HTML enlement that englobes
@@ -25,11 +40,21 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">Hi! I'm a React app.</p>
-        <Person name="Max" age="28" />
-        <Person name="Manu" age="29">
+        <button>Switch Name</button>
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}
+        />
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}
+        >
           My Hobbies: Racing
         </Person>
-        <Person name="Stephanie" age="26" />
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}
+        />
       </div>
     );
 
