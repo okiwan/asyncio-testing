@@ -26,6 +26,9 @@ class App extends Component {
         </header>
         <p className="App-intro">Hi! I'm a React app.</p>
         <Person />
+        <Person />
+        <Person />
+        <Person />
       </div>
     );
 
