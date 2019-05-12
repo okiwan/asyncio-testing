@@ -19,11 +19,17 @@ class App extends Component {
     ]
   };
 
-  switchNameHandler = event => {
+  doubleAge = event => {
+    let newState = JSON.parse(JSON.stringify(this.state));
+    newState.persons[event.target.id].age *= 2;
+    this.setState(newState);
+  };
+
+  switchNameHandler = newName => {
     // console.log("Switch was clicked!");
     // DO NOT DO THIS: this.state.persons[0].name = "Maximillian";
     let newState = JSON.parse(JSON.stringify(this.state));
-    newState.persons[0].name = "Maximilian";
+    newState.persons[0].name = newName;
     this.setState(newState);
   };
   render() {
@@ -47,20 +53,29 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">Hi! I'm a React app.</p>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <button onClick={this.switchNameHandler.bind(this, "Maximilian")}>
+          Switch Name
+        </button>
         <Person
+          id="0"
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
+          doubleAge={this.doubleAge}
         />
         <Person
+          id="1"
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
+          click={() => this.switchNameHandler("Max")}
+          doubleAge={this.doubleAge}
         >
           My Hobbies: Racing
         </Person>
         <Person
+          id="2"
           name={this.state.persons[2].name}
           age={this.state.persons[2].age}
+          doubleAge={this.doubleAge}
         />
       </div>
     );
