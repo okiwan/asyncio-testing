@@ -1,0 +1,7 @@
+.Output .label {
+  font-size: 2em;
+}
+
+.Output .value {
+  font-weight: bold;
+}
