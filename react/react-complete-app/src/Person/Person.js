@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Person.css";
 
 const Person = props => {
   /*
@@ -6,7 +7,7 @@ const Person = props => {
     to any nodes inside the tag defined by the component.
   */
   return (
-    <div>
+    <div className="Person">
       <p onClick={props.click}>
         I'm a {props.name} and I am{" "}
         <button id={props.id} onClick={props.doubleAge}>
