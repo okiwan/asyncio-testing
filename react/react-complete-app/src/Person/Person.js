@@ -15,6 +15,7 @@ const Person = props => {
         years old!
       </p>
       <p>{props.children}</p>
+      <input type="text" onChange={props.updateName} />
     </div>
   );
 };

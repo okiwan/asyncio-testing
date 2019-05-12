@@ -32,6 +32,13 @@ class App extends Component {
     newState.persons[0].name = newName;
     this.setState(newState);
   };
+
+  updateName = event => {
+    let newState = JSON.parse(JSON.stringify(this.state));
+    newState.persons[0].name = event.target.value;
+    this.setState(newState);
+  };
+
   render() {
     // Remember always to wrap the JSX of a component
     // inside one root HTML enlement that englobes
@@ -61,6 +68,7 @@ class App extends Component {
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
           doubleAge={this.doubleAge}
+          updateName={this.updateName}
         />
         <Person
           id="1"
