@@ -40,6 +40,15 @@ class App extends Component {
   };
 
   render() {
+    // Example of inline styles
+    const style = {
+      backgroundColor: "white",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer"
+    };
+
     // Remember always to wrap the JSX of a component
     // inside one root HTML enlement that englobes
     // the rest. This makes sense since we are developing
@@ -60,7 +69,10 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">Hi! I'm a React app.</p>
-        <button onClick={this.switchNameHandler.bind(this, "Maximilian")}>
+        <button
+          style={style}
+          onClick={this.switchNameHandler.bind(this, "Maximilian")}
+        >
           Switch Name
         </button>
         <Person
