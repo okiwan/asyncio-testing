@@ -13,9 +13,9 @@ class App extends Component {
   // to be re-rendered. The same should be said from "props".
   state = {
     persons: [
-      { name: "Max", age: 28 },
-      { name: "Manu", age: 29 },
-      { name: "Stephanie", age: 26 }
+      { id: 0, name: "Max", age: 28 },
+      { id: 1, name: "Manu", age: 29 },
+      { id: 2, name: "Stephanie", age: 26 }
     ],
     showPersons: false
   };
@@ -26,22 +26,32 @@ class App extends Component {
     this.setState(newState);
   };
 
-  switchNameHandler = newName => {
-    // console.log("Switch was clicked!");
-    // DO NOT DO THIS: this.state.persons[0].name = "Maximillian";
-    let newState = JSON.parse(JSON.stringify(this.state));
-    newState.persons[0].name = newName;
-    this.setState(newState);
-  };
+  switchNameHandler = (event, index) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === index;
+    });
 
-  updateName = event => {
-    let newState = JSON.parse(JSON.stringify(this.state));
-    newState.persons[0].name = event.target.value;
-    this.setState(newState);
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({ persons: persons });
   };
 
   togglePersonsHandler = () => {
     this.setState({ showPersons: !this.state.showPersons });
+  };
+
+  deletePersonHandler = personIndex => {
+    // Another way to do what we are doing below: const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
   };
 
   render() {
@@ -62,11 +72,17 @@ class App extends Component {
           {this.state.persons.map((person, idx) => {
             return (
               <Person
-                id={idx}
+                key={idx}
+                uid={idx}
                 name={person.name}
                 age={person.age}
                 doubleAge={this.doubleAge}
-                updateName={this.updateName}
+                changed={event => {
+                  this.switchNameHandler(event, person.id);
+                }}
+                click={() => {
+                  this.deletePersonHandler(idx);
+                }}
               />
             );
           })}
