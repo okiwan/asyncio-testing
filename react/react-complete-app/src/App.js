@@ -16,7 +16,8 @@ class App extends Component {
       { name: "Max", age: 28 },
       { name: "Manu", age: 29 },
       { name: "Stephanie", age: 26 }
-    ]
+    ],
+    showPersons: false
   };
 
   doubleAge = event => {
@@ -37,6 +38,10 @@ class App extends Component {
     let newState = JSON.parse(JSON.stringify(this.state));
     newState.persons[0].name = event.target.value;
     this.setState(newState);
+  };
+
+  togglePersonsHandler = () => {
+    this.setState({ showPersons: !this.state.showPersons });
   };
 
   render() {
@@ -69,34 +74,35 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">Hi! I'm a React app.</p>
-        <button
-          style={style}
-          onClick={this.switchNameHandler.bind(this, "Maximilian")}
-        >
+        <button style={style} onClick={this.togglePersonsHandler}>
           Switch Name
         </button>
-        <Person
-          id="0"
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          doubleAge={this.doubleAge}
-          updateName={this.updateName}
-        />
-        <Person
-          id="1"
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={() => this.switchNameHandler("Max")}
-          doubleAge={this.doubleAge}
-        >
-          My Hobbies: Racing
-        </Person>
-        <Person
-          id="2"
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-          doubleAge={this.doubleAge}
-        />
+        {this.state.showPersons ? (
+          <div>
+            <Person
+              id="0"
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+              doubleAge={this.doubleAge}
+              updateName={this.updateName}
+            />
+            <Person
+              id="1"
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={() => this.switchNameHandler("Max")}
+              doubleAge={this.doubleAge}
+            >
+              My Hobbies: Racing
+            </Person>
+            <Person
+              id="2"
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+              doubleAge={this.doubleAge}
+            />
+          </div>
+        ) : null}
       </div>
     );
 
