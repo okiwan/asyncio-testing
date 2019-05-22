@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Person from "./Person";
+import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
   // Only available on components created as
@@ -57,11 +58,15 @@ class App extends Component {
   render() {
     // Example of inline styles
     const style = {
-      backgroundColor: "white",
-      font: "inherit",
+      backgroundColor: "green",
+      color: "white",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer"
+      cursor: "pointer",
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -88,8 +93,23 @@ class App extends Component {
           })}
         </div>
       );
+
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
+
     }
 
+    const classes = []
+    if (this.state.persons.length <= 2) {
+      classes.push('red') 
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold')
+    }
+    
     // Remember always to wrap the JSX of a component
     // inside one root HTML enlement that englobes
     // the rest. This makes sense since we are developing
@@ -104,17 +124,20 @@ class App extends Component {
     // we need to use "className". This is a limitation due to
     // the fact the JavaScript has "class" as a reserved word.
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">Hi! I'm a React app.</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
-          Switch Name
-        </button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Welcome to React</h1>
+          </header>
+          <p className="App-intro">Hi! I'm a React app.</p>
+          <p className={classes.join(' ')}>This is really working!</p>
+          <button style={style} onClick={this.togglePersonsHandler}>
+            Toggle Names
+          </button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
 
     /*
@@ -130,4 +153,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
