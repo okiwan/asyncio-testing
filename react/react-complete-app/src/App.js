@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
-import classes from "./App.modules.css";
+import classes from "./App.module.css";
 import Person from "./Person";
 
 class App extends Component {
@@ -123,11 +123,11 @@ class App extends Component {
     // the fact the JavaScript has "class" as a reserved word.
     return (
       <div className={classes.App}>
-        <header className={classes.App_Header}>
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+        <header className={classes["App-header"]}>
+          <img src={logo} className={classes["App-logo"]} alt="logo" />
+          <h1 className={classes["App-title"]}>Welcome to React</h1>
         </header>
-        <p className="App-intro">Hi! I'm a React app.</p>
+        <p className={classes["App-intro"]}>Hi! I'm a React app.</p>
         <p className={assignedClasses.join(" ")}>This is really working!</p>
         <button style={style} onClick={this.togglePersonsHandler}>
           Toggle Names

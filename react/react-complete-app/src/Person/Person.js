@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./Person.css";
+import React from "react";
+import classes from "./Person.module.css";
 
 const Person = props => {
   /*
@@ -7,7 +7,7 @@ const Person = props => {
     to any nodes inside the tag defined by the component.
   */
   return (
-    <div className="Person">
+    <div className={classes.Person}>
       <p onClick={props.click}>
         I'm a {props.name} and I am{" "}
         <button id={props.uid} onClick={props.doubleAge}>
