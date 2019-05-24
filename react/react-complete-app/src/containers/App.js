@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import logo from "../assets/logo.svg";
 import classes from "./App.module.css";
-import Person from "../components/Person";
-import ErrorBoundary from "../components/ErrorBoundary";
+import Persons from "../components/Persons";
+import Cockpit from "../components/Cockpit";
 
 class App extends Component {
   // Only available on components created as
@@ -19,12 +19,6 @@ class App extends Component {
       { id: 2, name: "Stephanie", age: 26 }
     ],
     showPersons: false
-  };
-
-  doubleAge = event => {
-    let newState = JSON.parse(JSON.stringify(this.state));
-    newState.persons[event.target.id].age *= 2;
-    this.setState(newState);
   };
 
   switchNameHandler = (event, index) => {
@@ -57,42 +51,17 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let btnClass = "";
 
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, idx) => {
-            return (
-              <ErrorBoundary key={idx}>
-                <Person
-                  key={idx}
-                  uid={idx}
-                  name={person.name}
-                  age={person.age}
-                  doubleAge={this.doubleAge}
-                  changed={event => {
-                    this.switchNameHandler(event, person.id);
-                  }}
-                  click={() => {
-                    this.deletePersonHandler(idx);
-                  }}
-                />
-              </ErrorBoundary>
-            );
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.switchNameHandler}
+          />
         </div>
       );
-
-      btnClass = classes.Red;
-    }
-
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold);
     }
 
     // Remember always to wrap the JSX of a component
@@ -114,11 +83,11 @@ class App extends Component {
           <img src={logo} className={classes["App-logo"]} alt="logo" />
           <h1 className={classes["App-title"]}>Welcome to React</h1>
         </header>
-        <p className={classes["App-intro"]}>Hi! I'm a React app.</p>
-        <p className={assignedClasses.join(" ")}>This is really working!</p>
-        <button className={btnClass} onClick={this.togglePersonsHandler}>
-          Toggle Names
-        </button>
+        <Cockpit
+          persons={this.state.persons}
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonsHandler}
+        />
         {persons}
       </div>
     );

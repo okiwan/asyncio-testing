@@ -9,11 +9,7 @@ const Person = props => {
   return (
     <div className={classes.Person}>
       <p onClick={props.click}>
-        I'm a {props.name} and I am{" "}
-        <button id={props.uid} onClick={props.doubleAge}>
-          {props.age}
-        </button>{" "}
-        years old!
+        I'm a {props.name} and I am {props.age} years old!
       </p>
       <p>{props.children}</p>
       <input type="text" onChange={props.changed} value={props.name} />
