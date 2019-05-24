@@ -55,20 +55,8 @@ class App extends Component {
   };
 
   render() {
-    // Example of inline styles
-    const style = {
-      backgroundColor: "green",
-      color: "white",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black"
-      }
-    };
-
     let persons = null;
+    let btnClass = "";
 
     if (this.state.showPersons) {
       persons = (
@@ -93,11 +81,7 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = "red";
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black"
-      };
+      btnClass = classes.Red;
     }
 
     const assignedClasses = [];
@@ -129,7 +113,7 @@ class App extends Component {
         </header>
         <p className={classes["App-intro"]}>Hi! I'm a React app.</p>
         <p className={assignedClasses.join(" ")}>This is really working!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>
           Toggle Names
         </button>
         {persons}
