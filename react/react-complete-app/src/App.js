@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import classes from "./App.module.css";
 import Person from "./Person";
+import ErrorBoundary from "./ErrorBoundary";
 
 class App extends Component {
   // Only available on components created as
@@ -63,19 +64,21 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, idx) => {
             return (
-              <Person
-                key={idx}
-                uid={idx}
-                name={person.name}
-                age={person.age}
-                doubleAge={this.doubleAge}
-                changed={event => {
-                  this.switchNameHandler(event, person.id);
-                }}
-                click={() => {
-                  this.deletePersonHandler(idx);
-                }}
-              />
+              <ErrorBoundary key={idx}>
+                <Person
+                  key={idx}
+                  uid={idx}
+                  name={person.name}
+                  age={person.age}
+                  doubleAge={this.doubleAge}
+                  changed={event => {
+                    this.switchNameHandler(event, person.id);
+                  }}
+                  click={() => {
+                    this.deletePersonHandler(idx);
+                  }}
+                />
+              </ErrorBoundary>
             );
           })}
         </div>
