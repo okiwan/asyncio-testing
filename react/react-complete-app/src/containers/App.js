@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import logo from "../assets/logo.svg";
 import classes from "./App.module.css";
-import Person from "./Person";
-import ErrorBoundary from "./ErrorBoundary";
+import Person from "../components/Person";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 class App extends Component {
   // Only available on components created as
